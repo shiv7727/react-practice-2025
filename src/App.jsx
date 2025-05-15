@@ -1,35 +1,36 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState } from 'react';
+import './App.css';
 
-function App() {
-  const [count, setCount] = useState(0)
+const App = () => {
+	const [activeTab, setActiveTab] = useState('tab1');
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+	const tabs = [
+		{ id: 'tab1', label: 'Tab 1', content: 'This is Tab 1 content.' },
+		{ id: 'tab2', label: 'Tab 2', content: 'This is Tab 2 content.' },
+		{ id: 'tab3', label: 'Tab 3', content: 'This is Tab 3 content.' },
+	];
 
-export default App
+	return (
+		<div>
+			{/* tabs */}
+			{tabs.map((tab) => (
+				<button key={tab.id} onClick={() => setActiveTab(tab.id)}>
+					{tab.label}
+				</button>
+			))}
+
+			{/* active tabs content */}
+
+			{tabs.map(
+				(tab) =>
+					activeTab === tab.id && (
+						<div key={tab.id}>
+							<p>{tab.content}</p>
+						</div>
+					),
+			)}
+		</div>
+	);
+};
+
+export default App;
